@@ -1,8 +1,7 @@
 {{- $company := .company -}}
-{{- if and (ne $company "personal") (lookPath "op") -}}
-{{-   $item_name := printf "op://%s/aws-credentials" $company -}}
-{{-   $awsCreds := onepasswordRead $item_name -}}
+{{- $item_name := "op://{{ $company }}/aws-credentials" -}}
+{{- $aws_creds := onepasswordRead $item_name -}}
 
 [default]
-region = {{ $awsCreds.region }} 
-output = yaml 
+region = {{ $aws_creds.region }} 
+output = json 
