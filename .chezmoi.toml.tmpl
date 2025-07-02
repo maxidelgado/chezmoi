@@ -6,6 +6,9 @@
 {{- $work_email := promptStringOnce . "work_email" "Work email" -}}
 {{- $aws_region := promptStringOnce . "aws_region" "AWS region" -}}
 
+{{- $personal_git_signing_key := "op://personal/git-signing-key" -}}
+{{- $work_git_signing_key := printf "op://%s/git-signing-key" $company -}}
+
 [data]
     system_username = {{ $system_username | quote }}
     company = {{ $company | quote }}
@@ -14,6 +17,8 @@
     personal_email = {{ $personal_email | quote }}
     work_email = {{ $work_email | quote }}
     aws_region = {{ $aws_region | quote }}
+    personal_git_signing_key = {{ onepasswordRead "op://personal/git-signing-key" }}  
+    work_git_signing_key = {{ onepasswordRead $work_git_signing_key }}  
 
 [edit]
     command = "nvim"

@@ -1,5 +1,6 @@
-{{- $personal_signing_key := onepassword "personal/git-signing-key" -}}
-{{- $work_signing_key := onepassword "{{ $company }}/git-signing-key" -}}
+{{- $company := .chezmoi.company -}}
+{{- $personal_signing_key := .chezmoi.personal_git_signing_key -}}
+{{- $work_signing_key := .chezmoi.work_git_signing_key -}}
 
 [[ssh-keys]]
 item = "{{ $personal_signing_key }}"
