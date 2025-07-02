@@ -1,11 +1,19 @@
+{{- $system_username := promptStringOnce . "system_username" "System username" -}}
+{{- $company := promptStringOnce . "company" "Company" -}}
+{{- $first_name := promptStringOnce . "first_name" "First name" -}}
+{{- $last_name := promptStringOnce . "last_name" "Last name" -}}
+{{- $personal_email := promptStringOnce . "personal_email" "Personal email" -}}
+{{- $work_email := promptStringOnce . "work_email" "Work email" -}}
+{{- $aws_region := promptStringOnce . "aws_region" "AWS region" -}}
+
 [data]
-    system_username = {{ promptStringOnce . "system_username" "Your System Username" }}
-    company = {{ promptStringOnce . "company" "Your Company" }}
-    first_name = {{ promptStringOnce . "first_name" "Your First Name" }}
-    last_name = {{ promptStringOnce . "last_name" "Your Last Name" }}
-    personal_email = {{ promptStringOnce . "personal_email" "Your Personal Email" }}
-    work_email = {{ promptStringOnce . "work_email" "Your Work Email" }}
-    aws_region = {{ promptStringOnce . "aws_region" "Enter AWS region (e.g., us-east-1, us-west-2)" }}
+    system_username = {{ $system_username | quote }}
+    company = {{ $company | quote }}
+    first_name = {{ $first_name | quote }}
+    last_name = {{ $last_name | quote }}
+    personal_email = {{ $personal_email | quote }}
+    work_email = {{ $work_email | quote }}
+    aws_region = {{ $aws_region | quote }}
 
 [edit]
     command = "nvim"
