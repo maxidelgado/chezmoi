@@ -1,5 +1,5 @@
 {{- $company := .company -}}
-{{- $item_name := "op://{{ $company }}/aws-credentials" -}}
+{{- $item_name := printf "op://%s/aws-credentials" $company -}}
 {{- $aws_creds := onepasswordRead $item_name -}}
 
 [default]
