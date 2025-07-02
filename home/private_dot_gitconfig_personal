@@ -1,4 +1,4 @@
-{{- $signing_key := .chezmoi.work_git_signing_key -}}
+{{- $signing_key := onepasswordRead "op://personal/git-signing-key" -}}
 
 [user]
     signingkey = {{ $signing_key | quote }} 
