@@ -1,5 +1,15 @@
 #!/bin/bash
-set -e
-echo "› Installing Homebrew bundle from ~/Brewfile..."
-brew bundle --global
+# This script runs only once on a new machine
+
+set -e # Exit immediately if a command fails
+
+echo "› Checking for Homebrew and installing if not found..."
+if ! command -v brew &> /dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+echo "› Homebrew is installed. Tapping and installing from Brewfile..."
+brew bundle --global 
+
 echo "✅ Brew bundle complete."
+exit 0
