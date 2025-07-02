@@ -10,7 +10,7 @@
 {{- $aws_secret_key_path := printf "%s/secret_key" $aws_credentials_path -}}
 {{- $aws_region_path := printf "%s/region" $aws_credentials_path -}}
 
-{{- $personal_signing_key_path := "op://Private/Github - Personal" -}}
+{{- $personal_signing_key_path := "op://personal/ssh-key" -}}
 {{- $personal_public_key_path := printf "%s/public key" $personal_signing_key_path -}}
 {{- $work_signing_key_path := printf "op://%s/ssh-key" $company -}}
 {{- $work_public_key_path := printf "%s/public key" $work_signing_key_path -}}
