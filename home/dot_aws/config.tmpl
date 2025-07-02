@@ -1,5 +1,8 @@
-{{- $aws_region := .aws_region -}}
+{{- $company := .company -}}
+{{- if and (ne $company "personal") (lookPath "op") -}}
+{{-   $item_name := printf "op://%s/aws-credentials" $company -}}
+{{-   $awsCreds := onepasswordRead $item_name -}}
 
 [default]
-region = {{ $aws_region }} 
+region = {{ $awsCreds.region }} 
 output = yaml 
