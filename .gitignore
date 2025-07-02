@@ -1,3 +1,6 @@
 .DS_Store
-mover/mover
-mover/com.mdelgado.mover.plist
+
+# From nvim config
+home/dot_config/nvim/.envrc
+home/dot_config/nvim/spell/
+home/dot_config/nvim/.luarc.json
