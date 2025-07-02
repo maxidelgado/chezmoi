@@ -6,8 +6,8 @@
 [core]
     editor = "nvim"
 
-[includeIf {{ printf "gitdir:~/code/%s/" $company }}]
-    path = {{ printf "~/.gitconfig_%s" $company }}
+[includeIf {{ printf "gitdir:~/code/%s/" .company }}]
+    path = {{ printf "~/.gitconfig_%s" .company }}
 
 [push]
     autoSetupRemote = true
