@@ -16,9 +16,10 @@
     work_email = {{ $work_email | quote }}
     
     # AWS
-    aws_access_key = {{ onepasswordRead "op://%s/aws-credentials/access_key" }}
-    aws_secret_key = {{ onepasswordRead "op://%s/aws-credentials/secret_key" }}
-    aws_region = {{ onepasswordRead "op://%s/aws-credentials/region" }}
+    aws_credentials_path = printf "op://%s/aws-credentials" $company
+    aws_access_key = {{ onepasswordRead .aws_credentials_path "/access_key" }}
+    aws_secret_key = {{ onepasswordRead .aws_credentials_path "/secret_key" }}
+    aws_region = {{ onepasswordRead .aws_credentials_path "/region" }}
 
     # Signing keys
     personal_signing_key_path = "op://Private/Github - Personal/public key"
