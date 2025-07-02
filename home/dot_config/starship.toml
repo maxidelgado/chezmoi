@@ -1,0 +1,113 @@
+# Managed by chezmoi
+
+# Use the Catppuccin Mocha palette
+palette = "catppuccin_mocha"
+
+# Main prompt format
+format = """
+[╭─](rosewater)$directory$git_branch$git_status
+[╰─](rosewater)$character"""
+
+# Modules that appear on the right side of the prompt
+right_format = """$golang$nodejs$aws$kubernetes$time"""
+
+# Timeout for commands that run to display prompt information
+command_timeout = 1000
+
+# Makes the prompt appear on the same line as the output
+add_newline = false
+
+[character]
+success_symbol = "[›](green)"
+error_symbol = "[›](red)"
+vimcmd_symbol = "[‹](yellow)"
+
+[directory]
+style = "bold blue"
+truncation_length = 4
+truncate_to_repo = true # Show project root name when in a repo
+# Example substitutions
+[directory.substitutions]
+"~" = " " # Home icon
+"~/dev" = " " # Dev icon
+
+[git_branch]
+symbol = " " # Git branch icon
+format = '[$symbol$branch]($style) '
+style = "bold yellow"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style)) '
+style = "bold red"
+conflicted = " "
+ahead = " "
+behind = " "
+diverged = " "
+untracked = " "
+stashed = " "
+modified = " "
+staged = '[ ](green)' # Plus sign for staged
+renamed = " "
+deleted = " "
+
+[golang]
+symbol = " "
+format = '[$symbol($version)](bold cyan) '
+disabled = false
+
+# Added Node.js since it's in your Brewfile
+[nodejs]
+symbol = " "
+format = '[$symbol($version)](bold green) '
+disabled = false
+
+[aws]
+symbol = " "
+format = '[$symbol($profile) ($region)]($style) '
+style = "bold #ff9900" # AWS Orange
+disabled = false
+
+[kubernetes]
+symbol = '☸ '
+format = '[$symbol$context( › $namespace)]($style) '
+style = "bold magenta"
+disabled = false # Enable the module
+# Use a more generic alias example
+[kubernetes.context_aliases]
+"arn:aws:eks:.*:cluster/(.+-?)prod" = "prod/$1"
+"arn:aws:eks:.*:cluster/(.+-?)staging" = "stage/$1"
+
+[time]
+disabled = false
+format = '[ $time]($style) '
+style = "bold #b4befe" # Lavender
+time_format = "%T"
+
+# Keep your custom palette definition
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"

@@ -1,0 +1,169 @@
+# Managed by chezmoi. DO NOT EDIT DIRECTLY.
+
+#======================================================================#
+# 1. ENVIRONMENT & PATH
+#======================================================================#
+
+# Set the editor to Neovim installed by Homebrew
+export EDITOR='nvim'
+export VISUAL="$EDITOR"
+
+# Set language environment
+export LANG=en_US.UTF-8
+
+# Use a Zsh path array for cleaner, duplicate-free PATH management
+typeset -U path
+path=(
+  "$HOME/.asdf/shims"                      # ASDF shims must be first
+  "/opt/homebrew/bin"                       # Homebrew
+  "$HOME/go/bin"                            # Go binaries
+  "$HOME/.cargo/bin"                        # Rust/Cargo binaries
+  "$HOME/.local/share/solana/install/active_release/bin" # Solana
+  "/usr/local/bin"
+  "/usr/bin"
+  "/bin"
+  "/usr/sbin"
+  "/sbin"
+)
+
+#======================================================================#
+# 2. ZSH PLUGINS & COMPLETIONS
+#======================================================================#
+
+# Load Homebrew-installed Zsh plugins
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# Zsh completion system
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
+
+# Enable fuzzy matching for completions
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+#======================================================================#
+# 3. TOOL INITIALIZATION
+#======================================================================#
+
+# ASDF - Version Manager
+. "$(brew --prefix asdf)/libexec/asdf.sh"
+
+# Starship - Prompt
+export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+eval "$(starship init zsh)"
+
+# Atuin - Shell History
+eval "$(atuin init zsh)"
+
+# Zoxide - Smarter `cd`
+eval "$(zoxide init zsh)"
+
+# Direnv - Directory-based environments
+eval "$(direnv hook zsh)"
+
+# FZF - Fuzzy Finder
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#======================================================================#
+# 4. ALIASES
+#======================================================================#
+
+# --- General ---
+alias cl='clear'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias v='nvim'
+alias cat='bat'
+alias http="xh"
+
+# --- Eza (modern `ls`) ---
+alias l="eza -l --icons --git -a"
+alias lt="eza --tree --level=2 --long --icons --git"
+
+# --- Git ---
+alias g="git"
+alias gst="git status"
+alias ga="git add"
+alias gap="git add -p"
+alias gc="git commit -m"
+alias gca="git commit -a -m"
+alias gco="git checkout"
+alias gb="git branch"
+alias gp="git push origin HEAD"
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+
+# --- Docker (updated from podman to match Brewfile) ---
+alias dps="docker ps"
+alias dpa="docker ps -a"
+alias dco="docker compose"
+alias dx="docker exec -it"
+alias dl="docker ps -l -q"
+
+# --- Kubernetes ---
+alias k="kubectl"
+alias ka="kubectl apply -f"
+alias kg="kubectl get"
+alias kd="kubectl describe"
+alias kdel="kubectl delete"
+alias kl="kubectl logs -f"
+alias ke="kubectl exec -it"
+alias kgp="kubectl get pods"
+alias kgd="kubectl get deployments"
+alias kc="kubectx"
+alias kns="kubens"
+alias kcns='kubectl config set-context --current --namespace'
+
+#======================================================================#
+# 5. FUNCTIONS
+#======================================================================#
+
+# Change directory and list contents
+cx() { cd "$@" && l; }
+
+# Fuzzy find a directory and cd into it
+fcd() {
+  local dir
+  dir=$(find . -type d -not -path '*/\.*' | fzf) && cd "$dir" && l
+}
+
+# Fuzzy find a file and copy its path to clipboard
+f() { echo "$(find . -type f -not -path '*/\.*' | fzf)" | pbcopy }
+
+# Fuzzy find a file and open it in Neovim
+fv() { nvim "$(find . -type f -not -path '*/\.*' | fzf)" }
+
+# Yazi file manager integration
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+#======================================================================#
+# 6. KEYBINDINGS
+#======================================================================#
+
+# VI Mode
+bindkey -v
+bindkey 'jj' vi-cmd-mode
+
+# Zsh-autosuggestions bindings
+bindkey '^e' autosuggest-accept
+bindkey '^w' autosuggest-execute
+
+#======================================================================#
+# 7. COMPANY-SPECIFIC CONFIGURATION
+#    This block will only be included if the company is 'asapp'
+#======================================================================#
+{{ if eq .chezmoi.company "asapp" -}}
+
+# --- Asapp Configuration ---
+export GO111MODULE=on
+export GOPRIVATE="github.asapp.dev/*,github.com/asappinc/*"
+{{ end -}}

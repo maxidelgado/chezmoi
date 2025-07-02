@@ -1,0 +1,25 @@
+{{- $company := .chezmoi.company -}}
+{{- $first_name := .chezmoi.first_name -}}
+{{- $last_name := .chezmoi.last_name -}}
+{{- $personal_email := .chezmoi.personal_email -}}
+
+[user]
+    name = "{{ $first_name }} {{ $last_name }}"
+    email = "{{ $personal_email }}"
+
+[core]
+    editor = "nvim"
+
+[includeIf "gitdir:~/code/{{ $company }}/"]
+    path = ~/.gitconfig_{{ $company }}
+
+[push]
+    autoSetupRemote = true
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign

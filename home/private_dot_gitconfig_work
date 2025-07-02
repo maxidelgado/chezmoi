@@ -1,0 +1,6 @@
+{{- $work_email := .chezmoi.work_email -}}
+{{- $signing_key := onepassword "{{ $company }}/git-signing-key" -}}
+
+[user]
+    email = "{{ $work_email }}"
+    signingkey = "{{ $signing_key.public_key }}" 
