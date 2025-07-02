@@ -22,9 +22,9 @@
 
     # Signing keys
     personal_signing_key_path = "op://Private/Github - Personal/public key"
-    work_signing_key_path = {{ printf "op://%s/Github - Personal/public key" $company }}
-    personal_signing_key = {{ onepasswordRead $personal_signing_key_path }}
-    work_signing_key = {{ onepasswordRead $work_signing_key_path }}
+    work_signing_key_path = {{ printf "op://%s/Github - Personal/public key" .company }}
+    personal_signing_key = {{ onepasswordRead .personal_signing_key_path }}
+    work_signing_key = {{ onepasswordRead .work_signing_key_path }}
 
 [edit]
     command = "nvim"
