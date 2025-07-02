@@ -1,11 +1,11 @@
 [data]
-    system_username = {{ promptStringOnce "system_username" "Your System Username" }}
-    company = {{ promptStringOnce "company" "Your Company" }}
-    first_name = {{ promptStringOnce "first_name" "Your First Name" }}
-    last_name = {{ promptStringOnce "last_name" "Your Last Name" }}
-    personal_email = {{ promptStringOnce "personal_email" "Your Personal Email" }}
-    work_email = {{ promptStringOnce "work_email" "Your Work Email" }}
-    aws_region = {{ promptStringOnce "aws_region" "Enter AWS region (e.g., us-east-1, us-west-2)" }}
+    system_username = {{ promptStringOnce . "system_username" "Your System Username" }}
+    company = {{ promptStringOnce . "company" "Your Company" }}
+    first_name = {{ promptStringOnce . "first_name" "Your First Name" }}
+    last_name = {{ promptStringOnce . "last_name" "Your Last Name" }}
+    personal_email = {{ promptStringOnce . "personal_email" "Your Personal Email" }}
+    work_email = {{ promptStringOnce . "work_email" "Your Work Email" }}
+    aws_region = {{ promptStringOnce . "aws_region" "Enter AWS region (e.g., us-east-1, us-west-2)" }}
 
 [edit]
     command = "nvim"
