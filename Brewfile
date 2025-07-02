@@ -45,8 +45,10 @@ brew "zsh-syntax-highlighting"
 # ----------------------------------------
 # CASKS (FONTS & APPS) 💻
 # ----------------------------------------
-cask "wezterm" # Terminal emulator 
-cask "rancher" # Kubernetes and Docker GUI
+cask "wezterm"        # Terminal emulator 
+cask "rancher"        # Kubernetes and Docker GUI
+cask "1password"      # Password manager 
+cask "1password-cli"  # Password manager CLI 
 
 # Nerd Fonts are great for developer tool icons in the terminal
 cask "font-symbols-only-nerd-font"
