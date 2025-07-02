@@ -1,17 +1,13 @@
-{{- $company := .company -}}
-{{- $first_name := .first_name -}}
-{{- $last_name := .last_name -}}
-{{- $personal_email := .personal_email -}}
-
 [user]
-    name = "{{ $first_name }} {{ $last_name }}"
-    email = "{{ $personal_email }}"
+    name = {{ .full_name }} 
+    email = {{ .personal_email }}
+    signingkey = {{ .personal_signing_key }}
 
 [core]
     editor = "nvim"
 
-[includeIf "gitdir:~/code/{{ $company }}/"]
-    path = ~/.gitconfig_{{ $company }}
+[includeIf {{ printf "gitdir:~/code/%s/" $company }}]
+    path = {{ printf "~/.gitconfig_%s" $company }}
 
 [push]
     autoSetupRemote = true

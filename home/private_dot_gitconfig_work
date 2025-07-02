@@ -1,7 +1,3 @@
-{{- $company := .company -}}
-{{- $work_email := .work_email -}}
-{{- $signing_key := onepasswordRead "op://{{ $company }}/git-signing-key" -}}
-
 [user]
-    email = {{ $work_email }}
-    signingkey = {{ $signing_key.public_key | quote }} 
+    email = {{ .work_email }}
+    signingkey = {{ .work_signing_key }} 

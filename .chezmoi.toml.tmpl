@@ -6,12 +6,25 @@
 {{- $work_email := promptStringOnce . "work_email" "Work email" -}}
 
 [data]
+    # General
     system_username = {{ $system_username | quote }}
     company = {{ $company | quote }}
     first_name = {{ $first_name | quote }}
     last_name = {{ $last_name | quote }}
+    full_name = printf "%s %s" $first_name $last_name
     personal_email = {{ $personal_email | quote }}
     work_email = {{ $work_email | quote }}
+    
+    # AWS
+    aws_access_key = {{ onepasswordRead "op://%s/aws-credentials/access_key" }}
+    aws_secret_key = {{ onepasswordRead "op://%s/aws-credentials/secret_key" }}
+    aws_region = {{ onepasswordRead "op://%s/aws-credentials/region" }}
+
+    # Signing keys
+    personal_signing_key_path = "op://Private/Github - Personal/public key"
+    work_signing_key_path = {{ printf "op://%s/Github - Personal/public key" $company }}
+    personal_signing_key = {{ onepasswordRead $personal_signing_key_path }}
+    work_signing_key = {{ onepasswordRead $work_signing_key_path }}
 
 [edit]
     command = "nvim"

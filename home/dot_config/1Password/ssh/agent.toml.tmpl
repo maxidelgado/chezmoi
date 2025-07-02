@@ -1,11 +1,7 @@
-{{- $company := .company -}}
-{{- $personal_signing_key := onepasswordRead "op://Private/Github - Personal" -}}
-{{- $work_signing_key := onepasswordRead "op://{{ $company }}/git-signing-key" -}}
-
 [[ssh-keys]]
-item = "{{ $personal_signing_key }}"
+item = {{ .personal_signing_key_path }}
 vault = "Private"
 
 [[ssh-keys]]
-item = "{{ $work_signing_key }}"
-vault = "{{ $company }}"
+item = {{ .work_signing_key_path }}
+vault = {{ .company }}

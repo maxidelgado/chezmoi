@@ -1,4 +1,0 @@
-{{- $signing_key := onepasswordRead "op://Private/Github - Personal" -}}
-
-[user]
-    signingkey = {{ $signing_key | quote }} 
