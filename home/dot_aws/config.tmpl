@@ -1,6 +1,5 @@
-{{- $company := .chezmoi.company -}}
 {{- $aws_region := .chezmoi.aws_region -}}
 
-[{{ $company }}]
+[default]
 region = {{ $aws_region }} 
 output = yaml 
