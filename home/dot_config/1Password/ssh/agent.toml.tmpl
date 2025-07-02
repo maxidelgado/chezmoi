@@ -1,4 +1,4 @@
-{{- $company := .chezmoi.company -}}
+{{- $company := .company -}}
 {{- $personal_signing_key := onepasswordRead "op://personal/git-signing-key" -}}
 {{- $work_signing_key := onepasswordRead "op://{{ $company }}/git-signing-key" -}}
 
