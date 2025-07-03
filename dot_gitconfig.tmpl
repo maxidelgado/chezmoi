@@ -6,7 +6,7 @@
 [core]
     editor = "nvim"
 
-[includeIf {{ .work_gitconfig_dir }}]
+[includeIf "{{ .work_gitconfig_dir }}"]
     path = {{ .work_gitconfig_path }}
 
 [push]
