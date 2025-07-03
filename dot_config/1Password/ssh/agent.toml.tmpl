@@ -1,7 +1,7 @@
 [[ssh-keys]]
-item = {{ .personal_signing_key_path }}
+item = "ssh-key"
 vault = "personal"
 
 [[ssh-keys]]
-item = {{ .work_signing_key_path }}
-vault = {{ .company }}
+item = "ssh-key"
+vault = "{{ .company }}"
