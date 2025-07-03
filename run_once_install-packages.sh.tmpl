@@ -10,6 +10,14 @@ fi
 
 echo "› Homebrew is installed. Tapping and installing from Brewfile..."
 brew bundle --global
-
 echo "✅ Brew bundle complete."
+
+echo "› Installing asdf plugins..."
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
+asdf plugin add rust https://github.com/code-lever/asdf-rust.git
+asdf plugin add python https://github.com/danhper/asdf-python.git
+asdf install
+echo "✅ asdf plugins installed."
+
 exit 0

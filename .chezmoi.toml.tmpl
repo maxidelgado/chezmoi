@@ -4,6 +4,10 @@
 {{- $last_name := promptStringOnce . "last_name" "Last name" -}}
 {{- $personal_email := promptStringOnce . "personal_email" "Personal email" -}}
 {{- $work_email := promptStringOnce . "work_email" "Work email" -}}
+{{- $golang_version := promptStringOnce . "golang_version" "Golang version" -}}
+{{- $rust_version := promptStringOnce . "rust_version" "Rust version" -}}
+{{- $nodejs_version := promptStringOnce . "nodejs_version" "Node.js version" -}}
+{{- $python_version := promptStringOnce . "python_version" "Python version" -}}
 
 {{- $aws_credentials_path := printf "op://%s/aws-credentials" $company -}}
 {{- $aws_access_key_path := printf "%s/access_key" $aws_credentials_path -}}
@@ -29,6 +33,12 @@
     full_name = {{ printf "%s %s" $first_name $last_name | quote }}
     personal_email = {{ $personal_email | quote }}
     work_email = {{ $work_email | quote }}
+
+    # Languages
+    golang_version = {{ $golang_version | quote }}
+    rust_version = {{ $rust_version | quote }}
+    nodejs_version = {{ $nodejs_version | quote }}
+    python_version = {{ $python_version | quote }}
     
     # AWS
     aws_access_key = {{ onepasswordRead $aws_access_key_path | quote }}
