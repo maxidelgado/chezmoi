@@ -18,6 +18,7 @@ return {
       "ts_ls",
       "yamlls",
       "docker_compose_language_service",
+      "dockerfile-language-server",
       "graphql",
       "svelte",
       "angularls",
