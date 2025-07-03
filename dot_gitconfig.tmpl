@@ -1,6 +1,3 @@
-{{- $dir := printf "gitdir:~/code/%s/" .company -}}
-{{- $path := printf "~/.gitconfig_%s" .company -}}
-
 [user]
     name = {{ .full_name }} 
     email = {{ .personal_email }}
@@ -9,8 +6,8 @@
 [core]
     editor = "nvim"
 
-[includeIf {{ $dir | quotes }}]
-    path = {{ $path | quotes }}
+[includeIf {{ .work_gitconfig_dir }}]
+    path = {{ .work_gitconfig_path }}
 
 [push]
     autoSetupRemote = true
