@@ -1,5 +1,5 @@
-{{- dir := printf "gitdir:~/code/%s/" .company -}}
-{{- path := printf "~/.gitconfig_%s" .company -}}
+{{- $dir := printf "gitdir:~/code/%s/" .company -}}
+{{- $path := printf "~/.gitconfig_%s" .company -}}
 
 [user]
     name = {{ .full_name }} 
