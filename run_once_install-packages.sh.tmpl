@@ -8,9 +8,6 @@ if ! command -v brew &> /dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-# Change to the user's home directory, where the Brewfile is located
-cd "{{ .chezmoi.homeDir }}"
-
 echo "› Homebrew is installed. Tapping and installing from Brewfile..."
 brew bundle --global 
 
