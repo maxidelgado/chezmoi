@@ -2,10 +2,15 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+    },
     opts = {
       servers = {
         bashls = {},
         dockerls = {},
+        jsonls = {},
         gopls = {
           settings = {
             gofumpt = true,
@@ -43,12 +48,9 @@ return {
           },
         },
         lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
           settings = {
             format = {
-              enable = false, -- let conform handle the formatting
+              enable = false,
             },
             diagnostics = { globals = { "vim" } },
             telemetry = { enable = false },
@@ -74,8 +76,6 @@ return {
               completion = {
                 callSnippet = "Replace",
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
@@ -88,14 +88,6 @@ return {
         tinymist = {},
         ts_ls = {},
         yamlls = {
-          capabilities = {
-            textDocument = {
-              foldingRange = {
-                dynamicRegistration = false,
-                lineFoldingOnly = true,
-              },
-            },
-          },
           settings = {
             redhat = { telemetry = { enabled = false } },
             yaml = {
@@ -104,7 +96,6 @@ return {
                 url = "https://www.schemastore.org/api/json/catalog.json",
               },
               format = { enabled = false },
-              -- enabling this conflicts between Kubernetes resources, kustomization.yaml, and Helmreleases
               validate = false,
               schemas = {
                 kubernetes = "*.yaml",
@@ -128,6 +119,11 @@ return {
       },
     },
     config = function(_, opts)
+      require("mason").setup()
+      require("mason-lspconfig").setup({
+        ensure_installed = vim.tbl_keys(opts.servers),
+      })
+
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
         callback = function(event)
@@ -141,11 +137,6 @@ return {
           map("<leader>la", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
           map("<leader>lD", vim.lsp.buf.declaration, "Declaration")
 
-          -- The following two autocommands are used to highlight references of the
-          -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
-          -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })

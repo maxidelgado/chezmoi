@@ -85,11 +85,6 @@ return {
           },
         },
       },
-      -- experimental auto-brackets support
-      -- completion = { accept = { auto_brackets = { enabled = true } } },
-
-      -- experimental signature help support
-      -- signature = { enabled = true }
     },
     opts_extend = {
       "sources.default",

@@ -128,7 +128,6 @@ return {
 
   {
     "allaman/emoji.nvim",
-    dev = true,
     ft = "markdown",
     opts = {
       enable_cmp_integration = true,
