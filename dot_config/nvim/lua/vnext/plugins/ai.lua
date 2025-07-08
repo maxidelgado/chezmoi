@@ -33,33 +33,47 @@ return {
   -- SYSTEM 2: FOR CHAT & ACTIONS (CodeCompanion + Gemini)
   ----------------------------------------------------------------------
   {
-    "McHub.nvim/mcphub.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {
-      -- We only configure one provider: Gemini
-      providers = {
-        {
-          name = "google",
-          label = "Gemini 1.5 Pro",
-          -- This reads the environment variable you set earlier
-          api_key_name = onepass("personal/gemini/api-key"),
-          model = "gemini-1.5-pro-latest",
-        },
-      },
-    },
-  },
-  {
     "olimorris/codecompanion.nvim",
-    -- Dependencies are required for CodeCompanion to work correctly
+    cmd = {
+      "CodeCompanion",
+      "CodeCompanionActions",
+      "CodeCompanionChat",
+      "CodeCompanionCmd",
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
-      "McHub.nvim/mcphub.nvim",
-      "MunifTanjim/nui.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        ft = { "codecompanion" },
+      },
     },
     opts = {
-      -- This tells CodeCompanion to use McHub (and therefore Gemini)
-      adapter = "mcphub",
+      strategies = {
+        chat = {
+          adapter = "gemini",
+        },
+        inline = {
+          adapter = "gemini",
+        },
+      },
+      gemini = function()
+        return require("codecompanion.adapters").extend("gemini", {
+          schema = {
+            model = {
+              default = "gemini-2.5-flash-preview-05-20",
+            },
+          },
+          env = {
+            api_key = onepass("personal/gemini/api-key"),
+          },
+        })
+      end,
+      display = {
+        diff = {
+          provider = "mini_diff",
+        },
+      },
     },
   },
 }
