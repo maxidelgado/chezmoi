@@ -56,7 +56,7 @@ return {
             },
           },
           env = {
-            api_key = onepass("personal/gemini/api-key"),
+            api_key = onepass.get_secret("personal/gemini/api-key"),
           },
         })
       end,
