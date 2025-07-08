@@ -10,23 +10,14 @@ return {
     event = "InsertEnter", -- Load only when you start typing
     config = function()
       require("copilot").setup({
-        suggestion = {
-          auto_trigger = true,
-          keymap = {
-            accept = "<Tab>", -- Press Tab to accept a suggestion
-            dismiss = "<C-e>", -- Press Ctrl+e to dismiss it
-          },
-        },
-        panel = { enabled = false }, -- Disable the chat panel to avoid overlap
+        suggestion = { enabled = false },
+        panel = { enabled = false },
       })
     end,
   },
-  -- Helper to show Copilot suggestions in the nvim-cmp menu
+  -- Helper to show Copilot suggestions in the blink menu
   {
-    "zbirenbaum/copilot-cmp",
-    config = function()
-      require("copilot_cmp").setup()
-    end,
+    "giuxtaposition/blink-cmp-copilot",
   },
 
   ----------------------------------------------------------------------
@@ -41,7 +32,7 @@ return {
       "CodeCompanionCmd",
     },
     dependencies = {
-      "nvim-lua/plenary.nvim",
+      "nvim-lua/plenary.nvim", --
       "nvim-treesitter/nvim-treesitter",
       {
         "MeanderingProgrammer/render-markdown.nvim",

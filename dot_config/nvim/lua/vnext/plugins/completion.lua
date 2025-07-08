@@ -8,7 +8,9 @@ return {
         optional = true,
         opts = {},
       },
-      { "zbirenbaum/copilot-cmp" },
+      {
+        "giuxtaposition/blink-cmp-copilot",
+      },
     },
     version = "v1.*",
     opts = {
@@ -41,6 +43,21 @@ return {
       sources = {
         default = { "lsp", "copilot", "path", "snippets", "buffer" },
         providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            score_offset = 100,
+            async = true,
+            transform_items = function(_, items)
+              local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+              local kind_idx = #CompletionItemKind + 1
+              CompletionItemKind[kind_idx] = "Copilot"
+              for _, item in ipairs(items) do
+                item.kind = kind_idx
+              end
+              return items
+            end,
+          },
           lsp = {
             min_keyword_length = function(ctx)
               return ctx.trigger.kind == "manual" and 0 or 2 -- trigger when invoking with shortcut
@@ -86,6 +103,41 @@ return {
           },
         },
       },
+      appearance = {
+        -- Blink does not expose its default kind icons so you must copy them all (or set your custom ones) and add Copilot
+        kind_icons = {
+          Copilot = "",
+          Text = '󰉿',
+          Method = '󰊕',
+          Function = '󰊕',
+          Constructor = '󰒓',
+
+          Field = '󰜢',
+          Variable = '󰆦',
+          Property = '󰖷',
+
+          Class = '󱡠',
+          Interface = '󱡠',
+          Struct = '󱡠',
+          Module = '󰅩',
+
+          Unit = '󰪚',
+          Value = '󰦨',
+          Enum = '󰦨',
+          EnumMember = '󰦨',
+
+          Keyword = '󰻾',
+          Constant = '󰏿',
+
+          Snippet = '󱄽',
+          Color = '󰏘',
+          File = '󰈔',
+          Reference = '󰬲',
+          Folder = '󰉋',
+          Event = '󱐋',
+          Operator = '󰪚',
+          TypeParameter = '󰬛',
+        },
     },
     opts_extend = {
       "sources.default",
@@ -93,8 +145,6 @@ return {
     },
     config = function(_, opts)
       -- setup compat sources and provider
-      require("copilot_cmp").setup()
-
       local enabled = opts.sources.default
       for _, source in ipairs(opts.sources.compat or {}) do
         opts.sources.providers[source] = vim.tbl_deep_extend(
