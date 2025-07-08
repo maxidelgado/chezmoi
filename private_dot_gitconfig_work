@@ -1,0 +1,11 @@
+# Managed by Chezmoi
+# This configuration is loaded automatically by .gitconfig
+# when you are in the {{ .work_git_dir }} directory.
+
+[user]
+    email = {{ .work_email | quote }}
+
+# Rewrite Work's GitHub URLs to use an SSH alias.
+# This rule is more specific than the global one, so it takes precedence.
+[url "{{ .git_ssh_alias }}"]
+    insteadOf = {{ .git_https_url }}
