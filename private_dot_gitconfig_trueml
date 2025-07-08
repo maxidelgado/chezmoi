@@ -1,2 +1,8 @@
+[url "ssh://git@github.com:trueml"]
+    insteadOf = https://github.com/trueml
+
+[url "ssh://git@github.com:trueml"]
+    insteadOf = https://github.com/trueml/
+
 [user]
     email = {{ .work_email }}
