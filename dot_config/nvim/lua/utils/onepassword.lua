@@ -11,6 +11,7 @@ function M.get_secret(secret_uri)
 
   -- Execute the command and capture the output
   local secret = vim.fn.system(command)
+  vim.notify("secret " .. secret)
 
   -- vim.v.shell_error is non-zero if the command fails
   if vim.v.shell_error ~= 0 then
