@@ -107,4 +107,12 @@ map("n", "<C-s>", ":wa<CR>") -- save shortcut
 map("n", "<C-q>", ":qa<CR>") -- save shortcut
 map("n", "<A-d>", "yyp") -- duplicate line
 map("v", "<A-d>", ":'<,'>t'><CR>") -- duplicate line
-map("n", "ff", ":lua MiniFiles.open()<CR>", { desc = "Open mini files"}) -- open mini files
+map("n", "ff", ":lua MiniFiles.open()<CR>", { desc = "Open mini files" }) -- open mini files
+
+-- AI Mappings
+-- Open the main chat interface
+map("n", "<leader>ac", "<Cmd>CodeCompanion<CR>", { desc = "AI - Companion Chat" })
+-- Open the quick action menu (explain, find bugs, refactor, etc.)
+map({ "n", "v" }, "<leader>aq", "<Cmd>CodeCompanionActions<CR>", { desc = "AI - Quick Actions" })
+-- In visual mode, send the selected code directly to the chat
+map("v", "<leader>ac", "<Cmd>CodeCompanion<CR>", { desc = "AI - Chat with selection" })
