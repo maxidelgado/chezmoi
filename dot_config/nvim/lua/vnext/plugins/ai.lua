@@ -1,5 +1,5 @@
 -- First, require our new 1Password helper utility
-local onepass = require("utils.onepass")
+local onepass = require("utils.onepassword")
 
 return {
   ----------------------------------------------------------------------
