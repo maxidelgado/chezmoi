@@ -8,6 +8,7 @@ return {
         optional = true,
         opts = {},
       },
+      { "zbirenbaum/copilot-cmp" },
     },
     version = "v1.*",
     opts = {
@@ -38,7 +39,7 @@ return {
         ["<C-b>"] = { "scroll_documentation_down", "fallback" },
       },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "copilot", "path", "snippets", "buffer" },
         providers = {
           lsp = {
             min_keyword_length = function(ctx)
@@ -92,6 +93,8 @@ return {
     },
     config = function(_, opts)
       -- setup compat sources and provider
+      require("copilot_cmp").setup()
+
       local enabled = opts.sources.default
       for _, source in ipairs(opts.sources.compat or {}) do
         opts.sources.providers[source] = vim.tbl_deep_extend(
