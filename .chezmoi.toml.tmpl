@@ -8,7 +8,7 @@
 {{- $rust_version := promptStringOnce . "rust_version" "Rust version" -}}
 {{- $nodejs_version := promptStringOnce . "nodejs_version" "Node.js version" -}}
 {{- $python_version := promptStringOnce . "python_version" "Python version" -}}
-{{- $work_git_host := promptStringOnce . "git_host" "Work git host (github.com, bitbucket.com, etc)" -}}
+{{- $work_git_host := promptStringOnce . "work_git_host" "Work git host (github.com, bitbucket.com, etc)" -}}
 
 {{- $aws_credentials_path := printf "op://%s/aws-credentials" $company -}}
 {{- $aws_access_key_path := printf "%s/access_key" $aws_credentials_path -}}
