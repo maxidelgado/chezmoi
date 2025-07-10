@@ -7,7 +7,7 @@ echo "🚀 Starting Mover Setup..."
 
 # --- Configuration ---
 # The label for the launchd service, must be unique.
-PLIST_LABEL="com.mover"
+PLIST_LABEL="com.mdelgado.mover"
 # The final name of our compiled application.
 EXECUTABLE_NAME="mover"
 

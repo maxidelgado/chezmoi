@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.mover</string>
+    <string>com.mdelgado.mover</string>
     <key>ProgramArguments</key>
     <array>
         <string>__EXECUTABLE_PATH__</string>
