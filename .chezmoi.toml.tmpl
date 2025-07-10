@@ -20,8 +20,6 @@
 {{- $work_signing_key_path := printf "op://%s/ssh-key" $company -}}
 {{- $work_public_key_path := printf "%s/public key" $work_signing_key_path -}}
 
-{{- $work_gitconfig_dir := printf "gitdir:~/code/%s/" $company -}}
-{{- $work_gitconfig_path := printf "~/.gitconfig_%s" $company -}}
 {{- $work_git_ssh_alias := printf "ssh://git@%s-work:%s" $work_git_host $company -}}
 {{- $work_git_https_url := printf "https://%s/%s" $work_git_host $company -}}
 
@@ -54,8 +52,6 @@
     personal_signing_key = {{ onepasswordRead $personal_public_key_path | quote }}
     work_signing_key = {{ onepasswordRead $work_public_key_path | quote }}
 
-    work_gitconfig_dir = {{ $work_gitconfig_dir | quote }}
-    work_gitconfig_path = {{ $work_gitconfig_path | quote }}
     work_git_host = {{ $work_git_host | quote }}
     work_git_ssh_alias = {{ $work_git_ssh_alias | quote }}
     work_git_https_url = {{ $work_git_https_url | quote }}
