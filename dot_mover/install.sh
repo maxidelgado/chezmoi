@@ -21,7 +21,7 @@ LAUNCH_AGENTS_DIR="$HOME/Library/LaunchAgents"
 # The full path to the final .plist file.
 PLIST_PATH="$LAUNCH_AGENTS_DIR/$PLIST_LABEL.plist"
 # The path to the source .plist template.
-PLIST_TEMPLATE_PATH="$SCRIPT_DIR/$PLIST_LABEL.plist.tmpl"
+PLIST_TEMPLATE_PATH="$SCRIPT_DIR/$PLIST_LABEL.plist.template"
 # Paths for the log files.
 LOG_OUT_PATH="$HOME/Library/Logs/$PLIST_LABEL.log"
 LOG_ERR_PATH="$HOME/Library/Logs/$PLIST_LABEL.error.log"
