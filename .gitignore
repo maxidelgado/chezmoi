@@ -4,3 +4,5 @@
 home/dot_config/nvim/.envrc
 home/dot_config/nvim/spell/
 home/dot_config/nvim/.luarc.json
+
+.idea/*
